@@ -1,0 +1,13 @@
+<%= form_for @space do |f| %>
+<br>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<%= f.label :capacity %>
+<%= f.number_field :capacity %>
+<br>
+<%= f.label :price %>
+<%= f.number_field :price %>
+<br>
+<%= f.submit %>
+<%end%>
