@@ -1,0 +1,8 @@
+<% if current_user == nil %>
+  <h1>Welcome to ClubHub!</h1>
+  <h2><%= link_to "Sign Up", new_user_registration_path %></h2>
+  <h2><%= link_to "Sign In", new_user_session_path %></h2>
+<% else %>
+  <h1><%= @user.name %></h1>
+
+<% end %>
