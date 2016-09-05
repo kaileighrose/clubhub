@@ -3,6 +3,10 @@
   <h2><%= link_to "Sign Up", new_user_registration_path %></h2>
   <h2><%= link_to "Sign In", new_user_session_path %></h2>
 <% else %>
-  <h1><%= @user.name %></h1>
+  <h1>User Profile</h1>
+
+  <h2>User Teams</h2>
+    <h3>You don't seem to have any teams yet. Why not <%= link_to "join" %> or <%= link_to "create" %> a team? </h3>
+  <h2>Upcoming Meetings/Practices</h2>
 
 <% end %>
