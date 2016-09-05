@@ -1,2 +1,5 @@
 <h1><%=@space.name%></h1>
 <h2>Capacity: <%=@space.capacity%> people | Price: <%= number_to_currency(@space.price.to_f/100)%> per hour </h2>
+<p><%= link_to "Edit this Space", edit_space_path(@space) %></p>
+<p><%= link_to "Delete this Space", space_path(@space), method: :delete %></p>
+<p><%= link_to "View All Spaces", spaces_path %></p>
