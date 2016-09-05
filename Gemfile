@@ -27,6 +27,7 @@ gem 'devise'
 gem 'pundit'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "faker"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

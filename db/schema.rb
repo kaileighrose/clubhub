@@ -21,11 +21,6 @@ ActiveRecord::Schema.define(version: 20160905045109) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "members_teams", id: false, force: :cascade do |t|
-    t.integer "team_id",   null: false
-    t.integer "member_id", null: false
-  end
-
   create_table "spaces", force: :cascade do |t|
     t.string   "name"
     t.integer  "capacity"
@@ -41,6 +36,11 @@ ActiveRecord::Schema.define(version: 20160905045109) do
     t.integer  "coach_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
