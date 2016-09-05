@@ -9,6 +9,14 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def edit
+    @user = User.find(current_user.id)
+  end
+
+  def update
+    @user = User.find(current_user.id)
+  end
+
   def show
     @user = User.find(current_user.id) if current_user != nil
   end
