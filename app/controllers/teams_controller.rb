@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
   end
 
   def index
+    #add scope to make it only active teams
     @teams = Team.all
   end
 
