@@ -1,5 +1,14 @@
 require 'pry'
 class UsersController < ApplicationController
+
+  def home
+    if current_user == nil
+      render "home"
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
   def new
     @user = User.new
   end
@@ -19,7 +28,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id]) if params[:id] != nil
-    @user = User.find(current_user.id) if current_user != nil
+    @meetings = @user.meetings.where("time > ?", Time.now)
   end
 
   def index

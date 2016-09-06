@@ -1,12 +1,19 @@
-<% if current_user == nil %>
-  <h1>Welcome to ClubHub!</h1>
-  <h2><%= link_to "Sign Up", new_user_registration_path %></h2>
-  <h2><%= link_to "Sign In", new_user_session_path %></h2>
-<% else %>
-  <h1>User Profile</h1>
+<h1>User Profile</h1>
+<h2><%=@user.email%></h2>
 
-  <h2>User Teams</h2>
-    <h3>You don't seem to have any teams yet. Why not <%= link_to "join" %> or <%= link_to "create" %> a team? </h3>
+  <h2>Teams</h2>
+    <% if @user.teams.count == 0  && @user == current_user%>
+      <h3>You don't seem to have any teams yet. Why not <%= link_to "join" %> or <%= link_to "create" %> a team? </h3>
+      <% else %>
+      <ul><%@user.teams.each do |t|%>
+          <li><%=link_to t.name, team_path(t) %></li>
+        <%end%>
+      </ul> 
+      <%end%>
+  <%if @user == current_user %>
   <h2>Upcoming Meetings/Practices</h2>
+    <% @meetings.each do |m| %>
+    <h4><%= link_to m.time, meeting_path(m) %> | <%= m.team %></h4>
+    <%end%>
+  <%end%>
 
-<% end %>
