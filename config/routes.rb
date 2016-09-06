@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :meetings
   resources :spaces
   resources :teams
+  resources :users
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   root 'users#show'
   # The priority is based upon order of creation: first created -> highest priority.

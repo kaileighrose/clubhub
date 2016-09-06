@@ -1,0 +1,7 @@
+<h1><%=@team.name%></h1>
+<h2>Members:</h2>
+<ul>
+  <%@team.members.each do |m|%>
+    <li><%=link_to m.name, user_path(m)%></li>
+  <%end%>
+</ul>

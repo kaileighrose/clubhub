@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
 
   def index
     #add scope to make it only active teams
-    @teams = Team.all
+    @teams = Team.where(active: true)
   end
 
   private

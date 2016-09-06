@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id]) if params[:id] != nil
     @user = User.find(current_user.id) if current_user != nil
   end
 

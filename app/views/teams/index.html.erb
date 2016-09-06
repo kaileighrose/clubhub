@@ -1,0 +1,5 @@
+<h1>Active Teams</h1>
+<%@teams.each do |t| %>
+<h2><%=link_to t.name, team_path(t)%> | Members: <%= t.members.count %> </h2>
+<% end %>
+<h1><%= link_to "Add New Team", new_team_path %></h1>
