@@ -22,8 +22,10 @@ Specs:
 --Devise
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth)
 --Devise/OmniAuth (Facebook)
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
+- [x] Include nested resource show or index (URL e.g. users/2/recipes)
+-- teams/2/meetings/1
+- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
+-- teams/2/meetings/new
 - [ ] Include form display of validation errors (form URL e.g. /recipes/new)
 
 Confirm:

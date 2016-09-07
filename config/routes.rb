@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :meetings
+  
   resources :spaces
-  resources :teams
+  resources :teams do
+    resources :meetings
+  end
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks", :registrations => "registrations" }
   resources :users, only: [:show]
   root 'users#home'

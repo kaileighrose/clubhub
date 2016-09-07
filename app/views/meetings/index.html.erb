@@ -1,0 +1,4 @@
+<h1>Upcoming Meetings for <%=@team.name%></h1>
+<ul><% @meetings.each do |m|%>
+<li><%=m.display_date(m.time)%> | <%=m.display_time(m.time)%> | <%if m.space != nil %><%=link_to m.space.name, space_path(m.space)%><%end%></li>
+<%end%></ul>

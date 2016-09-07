@@ -2,19 +2,34 @@ class MeetingsController < ApplicationController
   
   def new
     @meeting = Meeting.new
+    @team = Team.find(params[:team_id])
   end
 
   def create
     @meeting = Meeting.create(meeting_params)
-    redirect_to meeting_path(@meeting)
+    @meeting.team = Team.find(params[:team_id])
+    @meeting.save
+    redirect_to team_meeting_path(@meeting.team, @meeting)
   end
 
   def edit
     @meeting = Meeting.find(params[:id])
   end
 
+  def availablespaces
+    @meeting = Meeting.find(params[:id])
+    @spaces = Space.available_spaces(@meeting.time)
+    redirect_to 'space'
+  end
+
+  def addspace
+    @meeting = Meeting.find(params[:id])
+    redirect_to team_meeting_path(@meeting)
+  end
+
   def update
     @meeting = Meeting.find(params[:id])
+    redirect_to team_meeting_path(@meeting)
   end
 
   def show
@@ -22,11 +37,13 @@ class MeetingsController < ApplicationController
   end
 
   def index
-    @meetings = Meeting.all
+    @team = Team.find(params[:team_id])
+    @meetings = @team.meetings
   end
 
   def destroy
     @meeting = Meeting.find(params[:id])
+    redirect_to team_meetings_path
   end
 
   private
