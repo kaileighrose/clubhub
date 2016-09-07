@@ -3,5 +3,10 @@
 <ul>
   <%@team.members.each do |m|%>
     <li><%=link_to m.name, user_path(m)%></li>
+    <li><%=m%></li>
   <%end%>
 </ul>
+<%= link_to "Mark this Team Inactive", edit_team_path %><br>
+<%= link_to "Edit this Team", edit_team_path(@team) %><br>
+<%= link_to "See All Teams", teams_path %><br>
+

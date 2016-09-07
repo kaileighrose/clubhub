@@ -1,10 +1,30 @@
+require 'pry'
 class TeamsController < ApplicationController
   def new
     @team = Team.new
+    5.times do
+      @team.members.build
+    end
   end
 
   def create
     @team = Team.create(team_params)
+    #@team.members << User.find_or_create_by(name: params[:user][:name])
+   # @team.save
+    redirect_to team_path(@team)
+  end
+
+  def edit
+    @team = Team.find(params[:id])
+  end
+
+  def update
+    binding.pry
+    @team = Team.find(params[:id])
+    @team.update(team_params)
+    #@team.members << User.find_or_create_by(name: params[:user][:name])
+    @team.save
+    redirect_to team_path(@team)
   end
 
   def show
@@ -19,6 +39,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :active, :meeting_id, :coach_id, :members => [])
+    params.require(:team).permit(:name, :active, :meeting_id, :coach_id, :user => [:name], :members_attributes => [:name], :members => [])
   end
 end

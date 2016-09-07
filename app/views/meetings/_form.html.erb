@@ -1,0 +1,7 @@
+<%=form_for @meeting do |m| %>
+  <%= f.hidden_field :team_id => @team_id%>
+  <%= f.label :time %>
+  <%= f.datetime_field :time %>
+  
+<%=f.submit%>
+<%end%>
