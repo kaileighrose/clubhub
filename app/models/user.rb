@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_and_belongs_to_many :teams
   has_many :meetings, through: :teams
+  validates :email, presence: true
+  validates :email, uniqueness: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid.to_s).first_or_create do |user|

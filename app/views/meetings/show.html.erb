@@ -7,3 +7,4 @@
 <%else%>
 <h3>Location TBD. <%= link_to "Find an Available Space", spaces_path%></h3>
 <%end%>
+<h3><%=link_to "Cancel this Meeting", team_meeting_path(@meeting.team, @meeting), method: :delete %> </h3>

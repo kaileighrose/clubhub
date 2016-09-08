@@ -3,6 +3,8 @@ class Team < ActiveRecord::Base
   has_and_belongs_to_many :members, :class_name => "User"
   has_many :meetings
 
+  validates :name, presence: true
+
   accepts_nested_attributes_for :members
 
   def members_attributes=(members)
