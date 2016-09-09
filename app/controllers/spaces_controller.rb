@@ -6,7 +6,11 @@ class SpacesController < ApplicationController
 
   def create
     @space = Space.create(space_params)
-    redirect_to space_path(@space)
+    if @space.save
+      redirect_to space_path(@space)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -16,8 +20,11 @@ class SpacesController < ApplicationController
   def update
     @space = Space.find(params[:id])
     @space.update(space_params)
-    @space.save
-    redirect_to space_path(@space)
+    if @space.save
+      redirect_to space_path(@space)
+    else
+      render :edit
+    end
   end
 
   def show

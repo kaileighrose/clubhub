@@ -8,10 +8,13 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.create(team_params)
+    @team = Team.create!(team_params)
     #@team.members << User.find_or_create_by(name: params[:user][:name])
-   # @team.save
-    redirect_to team_path(@team)
+    if @team.save
+      redirect_to team_path(@team)
+    else
+      render :edit
+    end
   end
 
   def edit
@@ -23,8 +26,11 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @team.update(team_params)
     #@team.members << User.find_or_create_by(name: params[:user][:name])
-    @team.save
-    redirect_to team_path(@team)
+    if @team.save
+      redirect_to team_path(@team)
+    else
+      render :edit
+    end
   end
 
   def show

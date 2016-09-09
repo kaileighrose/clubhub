@@ -3,7 +3,7 @@
 
   <h2>Teams</h2>
     <% if @user.teams.count == 0  && @user == current_user%>
-      <h3>You don't seem to have any teams yet. Why not <%= link_to "join" %> or <%= link_to "create" %> a team? </h3>
+      <h3>You don't seem to have any teams yet. Why not <%= link_to "join", teams_path %> or <%= link_to "create", new_team_path %> a team? </h3>
       <% else %>
       <ul><%@user.teams.each do |t|%>
           <li><%=link_to t.name, team_path(t) %></li>

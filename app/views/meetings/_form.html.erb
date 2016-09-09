@@ -1,3 +1,17 @@
+<% if @meeting.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@meeting.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% @meeting.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <%=form_for(@meeting, url: team_meetings_path) do |f| %>
   <%= f.label :time %>
   <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %>

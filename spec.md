@@ -24,12 +24,14 @@ Specs:
 --Devise/OmniAuth (Facebook)
 - [x] Include nested resource show or index (URL e.g. users/2/recipes)
 -- teams/2/meetings/1
+-- teams/2/meetings/
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
 -- teams/2/meetings/new
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
+-- _form.html.erb for spaces, meetings, and teams. User has it through devise.
 
 Confirm:
 - [ ] The application is pretty DRY
 - [x] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
+- [x] Views use helper methods if appropriate
 - [x] Views use partials if appropriate

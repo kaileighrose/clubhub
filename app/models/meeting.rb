@@ -8,7 +8,7 @@ class Meeting < ActiveRecord::Base
 
   def date_in_future
     if time < Date.today
-      errors.add(:time, "can't be in the past")
+      errors.add(:time, "-- you can't schedule a meeting in the past")
     end
   end
 end

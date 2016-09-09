@@ -4,6 +4,7 @@ class Team < ActiveRecord::Base
   has_many :meetings
 
   validates :name, presence: true
+  validates :name, uniqueness: true
 
   accepts_nested_attributes_for :members
 
