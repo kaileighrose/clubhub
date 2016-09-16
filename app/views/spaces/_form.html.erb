@@ -21,7 +21,7 @@
 <%= f.number_field :capacity %>
 <br>
 <%= f.label :price %>
-<%= f.number_field :price %>
+<%= f.number_field :price, in: 1.0..20.0, step: 0.5%>
 <br>
 <%= f.submit %>
 <%end%>

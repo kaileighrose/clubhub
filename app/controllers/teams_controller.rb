@@ -17,14 +17,26 @@ class TeamsController < ApplicationController
     end
   end
 
+  def join
+    @team = Team.find(params[:id])
+    @team.members << current_user
+    if @team.save
+      redirect_to team_path(@team)
+    else
+      flash[:alert] = "unable to to join team"
+      redirect_to team_path(@team)
+    end
+  end
+
   def edit
     @team = Team.find(params[:id])
   end
 
   def update
-    binding.pry
     @team = Team.find(params[:id])
+    binding.pry
     @team.update(team_params)
+    
     #@team.members << User.find_or_create_by(name: params[:user][:name])
     if @team.save
       redirect_to team_path(@team)
@@ -45,6 +57,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :active, :meeting_id, :coach_id, :user => [:name], :members_attributes => [:name], :members => [])
+    params.require(:team).permit(:name, :active, :meeting_id, :coach_id, :members => [:id])
   end
 end

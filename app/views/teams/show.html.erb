@@ -3,10 +3,13 @@
 <ul>
   <%@team.members.each do |m|%>
     <li><%=link_to m.name, user_path(m)%></li>
-    <li><%=m%></li>
   <%end%>
 </ul>
 <%= link_to "Mark this Team Inactive", edit_team_path %><br>
-<%= link_to "Edit this Team", edit_team_path(@team) %><br>
+<% if @team.members.include?(current_user) %>
+  <%= link_to "Edit this Team", edit_team_path(@team) %><br>
+<%else%>
+  <%= link_to "Join this Team", "#{@team.id}/join", method: :post %><br>
+<%end%>
 <%= link_to "See All Teams", teams_path %><br>
 

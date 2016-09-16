@@ -11,7 +11,7 @@ class Team < ActiveRecord::Base
   def members_attributes=(members)
     binding.pry
     members.each do |member|
-      self.members << User.find_or_create_by(name: member.name)
+      self.members << User.find_by(name: member.name)
     end
     self.members.update
   end

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_and_belongs_to_many :teams
   has_many :meetings, through: :teams
+  has_many :notes, through: :meetings
   validates :email, presence: true
   validates :email, uniqueness: true
 

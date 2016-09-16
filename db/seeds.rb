@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 10.times do 
   Space.create(
-    name: Faker::Commerce.product_name, 
+    name: Faker::Address.city, 
     capacity: Faker::Number.number(2), 
-    price: Faker::Number.number(4)
+    price: Faker::Number.number(2)
   )
 end
 
@@ -19,11 +19,11 @@ end
 
 10.times do
   counter = 1
-  team = Team.create(name: Faker::Company.name, active: true)
+  team = Team.create(name: Faker::Hipster.words(2).join(" "), active: true)
   team.members << User.find(counter)
-  team.members << User.find(counter + 1)
-  team.members << User.find(counter + 2)
-  team.members << User.find(counter + 3)
+  team.members << User.find(counter+=1)
+  team.members << User.find(counter+=2)
+  team.members << User.find(counter+=3)
   counter += 1
 end
 

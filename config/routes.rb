@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   
+  resources :notes
   resources :spaces
   resources :teams do
-    resources :meetings
+    resources :meetings do
+      resources :notes, only: [:new, :edit]
+    end
   end
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks", :registrations => "registrations" }
   resources :users, only: [:show]
+  post "teams/:id/join", to: "teams#join"
   root 'users#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

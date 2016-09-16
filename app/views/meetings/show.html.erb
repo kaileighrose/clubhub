@@ -7,4 +7,8 @@
 <%else%>
 <h3>Location TBD. <%= link_to "Find an Available Space", spaces_path%></h3>
 <%end%>
+<% @meeting.notes.each do n %>
+  <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
+<%end%>
+<h3><%=link_to "Add a Note", new_team_meeting_note_path</h3>
 <h3><%=link_to "Cancel this Meeting", team_meeting_path(@meeting.team, @meeting), method: :delete %> </h3>

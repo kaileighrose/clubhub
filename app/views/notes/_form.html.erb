@@ -1,0 +1,7 @@
+<%=form_for @note do |f| %>
+<%=f.label :content %>
+<%=f.text_area :content %>
+<%f.hidden_field :meeting_id, meeting_id: @meeting.id %>
+<%f.hidden_field :author_id, author_id: current_user.id %>
+<%=f.submit%>
+<%end%>
