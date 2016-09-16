@@ -5,11 +5,14 @@
     <li><%=link_to m.name, user_path(m)%></li>
   <%end%>
 </ul>
-<%= link_to "Mark this Team Inactive", edit_team_path %><br>
+<%= link_to "See All Teams", teams_path %><br>
 <% if @team.members.include?(current_user) %>
   <%= link_to "Edit this Team", edit_team_path(@team) %><br>
+  <%if @team.meetings != nil %>
+    <%= render "meetings/meetings"%>
+  <%else%>
+    <%= link_to "Add a New Meeting", new_team_meeting_path(@team) %><br>
+  <%end%>
 <%else%>
   <%= link_to "Join this Team", "#{@team.id}/join", method: :post %><br>
 <%end%>
-<%= link_to "See All Teams", teams_path %><br>
-

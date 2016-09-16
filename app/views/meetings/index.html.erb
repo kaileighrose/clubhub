@@ -1,6 +1,0 @@
-<h1>Upcoming Meetings for <%=@team.name%></h1>
-<ul><% @meetings.each do |m|%>
-<li><%if m.time != nil %><%=format_date(m.time)%> | <%=format_time(m.time)%><%end%> <%if m.space != nil %> | <%=link_to m.space.name, space_path(m.space)%><%end%> <%= link_to "Cancel this Meeting", team_meeting_path(@team, m), method: :delete %></li>
-<%end%></ul>
-
-<h3><%= link_to "Add a New Meeting", new_team_meeting_path %>
