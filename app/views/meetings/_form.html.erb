@@ -14,6 +14,16 @@
 <% end %>
 <%=form_for(@meeting, url: team_meetings_path) do |f| %>
   <%= f.label :time %>
-  <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %>
+  <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %><br>
+  <br>
+  <%= f.label :location %>
+  <%= f.text_field :location %><br>
+  <br>
+  <%= f.label :note %>
+  <%= f.fields_for :notes do |note_fields| %>
+    <%= note_fields.text_area :content %>
+    <%= note_fields.hidden_field :author_id, :value => current_user.id %>
+  <% end %>
+  <br>
 <%=f.submit%>
 <%end%>

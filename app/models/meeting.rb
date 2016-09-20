@@ -1,3 +1,4 @@
+require 'pry'
 class Meeting < ActiveRecord::Base
   belongs_to :team
   belongs_to :space
@@ -8,8 +9,8 @@ class Meeting < ActiveRecord::Base
   validates :team_id, presence: true
   validate :date_in_future
 
-  def note_attributes=(note)
-    newn = Note.create(author_id: current_user.id, meeting_id: self.id, content: note.content)
+  def notes_attributes=(note)
+    newn = Note.create(author_id: note["0"]["author_id"], meeting_id: self, content: note["0"]["content"])
     newn.save
     self.notes << newn
   end

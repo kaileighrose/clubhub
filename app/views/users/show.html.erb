@@ -13,7 +13,7 @@
   <%if @user == current_user %>
   <h2>Upcoming Meetings/Practices</h2>
     <% @meetings.each do |m| %>
-    <h4><%= link_to m.time, meeting_path(m) %> | <%= m.team.name %></h4>
+    <h4><%= link_to format_date(m.time), team_meeting_path(m.team, m) %> | <%=format_time(m.time)%> | <%= m.team.name %></h4>
     <%end%>
     <br>
     <h4><%= link_to "Edit Your Account", edit_user_registration_path %></h4>

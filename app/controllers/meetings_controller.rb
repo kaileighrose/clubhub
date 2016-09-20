@@ -3,11 +3,18 @@ class MeetingsController < ApplicationController
   def new
     @meeting = Meeting.new
     @team = Team.find(params[:team_id])
+    @meeting.notes.build
   end
 
   def create
     @meeting = Meeting.create(meeting_params)
     @meeting.team = Team.find(params[:team_id])
+    if @meeting.notes != nil
+      @meeting.notes.each do |n|
+        n.meeting_id = @meeting.id
+        n.save
+      end
+    end
     if @meeting.save
       redirect_to team_meeting_path(@meeting.team, @meeting)
     else
@@ -17,6 +24,7 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
+    @meeting.notes.build
   end
 
   def availablespaces
@@ -57,6 +65,6 @@ class MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(:team_id, :space_id, :time, :note_attributes => [:content])
+    params.require(:meeting).permit(:team_id, :space_id, :time, :location, :notes_attributes => [:content, :author_id])
   end
 end
