@@ -12,7 +12,7 @@
     </ul>
   </div>
 <% end %>
-<%=form_for(@meeting, url: team_meetings_path) do |f| %>
+<%=form_for(@meeting, url: @path) do |f| %>
   <%= f.label :time %>
   <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %><br>
   <br>

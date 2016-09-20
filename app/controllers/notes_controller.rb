@@ -22,7 +22,6 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
     @note.update(note_params)
-    binding.pry
     if @note.save
       redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
     else

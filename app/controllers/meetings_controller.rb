@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
   
   def new
+    @path = team_meetings_path
     @meeting = Meeting.new
     @team = Team.find(params[:team_id])
     @meeting.notes.build
@@ -24,23 +25,14 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
+    @team = Team.find(params[:team_id])
+    @path = team_meeting_path(@team, @meeting)
     @meeting.notes.build
-  end
-
-  def availablespaces
-    @meeting = Meeting.find(params[:id])
-    @spaces = Space.available_spaces(@meeting.time)
-    redirect_to 'space'
-  end
-
-  def addspace
-    @meeting = Meeting.find(params[:id])
-    redirect_to team_meeting_path(@meeting)
   end
 
   def update
     @meeting = Meeting.find(params[:id])
-    if @meeting.update
+    if @meeting.save
       redirect_to team_meeting_path(@meeting.team, @meeting)
     else
       render :edit
