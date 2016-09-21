@@ -3,16 +3,15 @@ class Team < ActiveRecord::Base
   has_and_belongs_to_many :members, :class_name => "User"
   has_many :meetings
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :members
 
-  def members_attributes=(members)
-    binding.pry
+  def add_members(members)
     members.each do |member|
-      self.members << User.find_by(name: member.name)
+      if member != nil && member != ""
+        self.members << User.find(member)
+      end
     end
-    self.members.update
   end
 end

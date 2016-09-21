@@ -2,14 +2,11 @@ require 'pry'
 class TeamsController < ApplicationController
   def new
     @team = Team.new
-    5.times do
-      @team.members.build
-    end
   end
 
   def create
-    @team = Team.create!(team_params)
-    #@team.members << User.find_or_create_by(name: params[:user][:name])
+    @team = Team.create(team_params)
+    @team.add_members(params[:team][:members])
     if @team.save
       redirect_to team_path(@team)
     else
@@ -34,10 +31,8 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    binding.pry
     @team.update(team_params)
-    
-    #@team.members << User.find_or_create_by(name: params[:user][:name])
+    @team.add_members(params[:team][:members])
     if @team.save
       redirect_to team_path(@team)
     else
@@ -50,7 +45,6 @@ class TeamsController < ApplicationController
   end
 
   def index
-    #add scope to make it only active teams
     @teams = Team.where(active: true)
   end
 

@@ -16,11 +16,12 @@
 <%= f.label :name %>
 <%= f.text_field :name %>
 <br>
-<%=collection_select(:team, :members, User.all, :id, :name, prompt: true)%>
-<%=collection_select(:team, :members, User.all, :id, :name, prompt: true)%>
-<%=collection_select(:team, :members, User.all, :id, :name, prompt: true)%>
-<%=collection_select(:team, :members, User.all, :id, :name, prompt: true)%>
-<%=collection_select(:team, :members, User.all, :id, :name, prompt: true)%>
+<%= f.label :members %>
+<br>
+<%=f.collection_check_boxes(:members, User.all, :id, :name, {:checked=> @team.members.map(&:id)})%><br>
+<br>
+<%= f.label "This is an Active Team" %>
+<%= f.check_box :active %>
 <br>
 <%=f.submit%>
 <%end%>
