@@ -46,12 +46,13 @@ class MeetingsController < ApplicationController
   def index
     @team = Team.find(params[:team_id])
     @meetings = @team.meetings
+    redirect_to team_path
   end
 
   def destroy
     @meeting = Meeting.find(params[:id]) 
     @meeting.destroy
-    redirect_to team_meetings_path
+    redirect_to team_path
   end
 
   private

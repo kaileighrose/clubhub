@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   
   resources :notes
-  resources :spaces
   resources :teams do
     resources :meetings do
       resources :notes, only: [:new, :edit]

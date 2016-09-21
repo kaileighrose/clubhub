@@ -1,5 +1,0 @@
-<h1>Practice/Meeting Spaces</h1>
-<% @spaces.each do |s| %>
-  <h3><%= link_to s.name, space_path(s)%> | Capacity: <%= s.capacity %> people | Price: <%= number_to_currency(s.price.to_f)%> per hour</h3>
-<% end %>
-<h2><%= link_to "Add New Space", new_space_path%></h2>
