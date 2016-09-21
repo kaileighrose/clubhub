@@ -1,51 +1,80 @@
 require 'pry'
 class TeamsController < ApplicationController
   def new
-    @team = Team.new
+    if current_user != nil
+      @team = Team.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
-    @team = Team.create(team_params)
-    @team.add_members(params[:team][:members])
-    if @team.save
-      redirect_to team_path(@team)
+    if current_user != nil
+      @team = Team.create(team_params)
+      @team.add_members(params[:team][:members])
+      if @team.save
+        redirect_to team_path(@team)
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to root_path
     end
   end
 
   def join
-    @team = Team.find(params[:id])
-    @team.members << current_user
-    if @team.save
-      redirect_to team_path(@team)
+    if current_user != nil
+      @team = Team.find(params[:id])
+      @team.members << current_user
+      if @team.save
+        redirect_to team_path(@team)
+      else
+        flash[:alert] = "unable to to join team"
+        redirect_to team_path(@team)
+      end
     else
-      flash[:alert] = "unable to to join team"
-      redirect_to team_path(@team)
+      redirect_to root_path
     end
   end
 
   def edit
     @team = Team.find(params[:id])
+    if current_user == nil || @team.members.include?(current_user) != true
+      flash[:error] = "Must Be a Team Member to Edit"
+      redirect_to root_path
+    end
   end
 
   def update
     @team = Team.find(params[:id])
-    @team.update(team_params)
-    @team.add_members(params[:team][:members])
-    if @team.save
-      redirect_to team_path(@team)
+    if current_user == nil || @team.members.include?(current_user) != true
+      flash[:error] = "Must Be a Team Member to Edit"
+      redirect_to root_path
     else
-      render :edit
+      @team.update(team_params)
+      @team.add_members(params[:team][:members])
+      if @team.save
+        redirect_to team_path(@team)
+      else
+        render :edit
+      end
     end
   end
 
   def show
-    @team = Team.find(params[:id])
+    if current_user != nil
+      @team = Team.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def index
-    @teams = Team.where(active: true)
+    if current_user != nil
+      @teams = Team.where(active: true)
+    else
+      redirect_to root_path
+    end
   end
 
   private

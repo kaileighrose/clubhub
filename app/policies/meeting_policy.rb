@@ -1,0 +1,3 @@
+class MeetingPolicy < ApplicationPolicy
+  
+end

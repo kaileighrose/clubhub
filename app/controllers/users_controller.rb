@@ -41,10 +41,6 @@ class UsersController < ApplicationController
     @meetings = @user.meetings.where("time > ?", Time.now)
   end
 
-  def index
-    @users = User.all
-  end
-
   private
 
   def user_params

@@ -16,7 +16,12 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
-    @meeting_id = params[:meeting_id]
+    if @note.author_id == current_user.id
+      @meeting_id = params[:meeting_id]
+    else
+      flash[:error] = "Can Only Edit Your Own Notes"
+      redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
+    end
   end
 
   def update
@@ -31,11 +36,18 @@ class NotesController < ApplicationController
 
   def destroy
     @note = Note.find(params[:id])
-    @meeting = Meeting.find(@note.meeting_id)
-    @team = @meeting.team
-    @note.destroy
-    redirect_to team_meeting_path(@team, @meeting)
+    if @note.author_id == current_user.id
+      @meeting = Meeting.find(@note.meeting_id)
+      @team = @meeting.team
+      @note.destroy
+      redirect_to team_meeting_path(@team, @meeting)
+    else
+      flash[:error] = "Can Only Delete Your Own Notes"
+      redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
+    end
+    
   end
+
   private
 
   def note_params
