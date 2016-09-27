@@ -43,7 +43,7 @@ class MeetingsController < ApplicationController
     else
       @meeting = Meeting.find(params[:id])
       @path = team_meeting_path(@team, @meeting)
-      @note = @meeting.notes.build
+      @note_id = @meeting.notes.first.id
     end
   end
 
@@ -96,6 +96,6 @@ class MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(:team_id, :space_id, :time, :location, :notes_attributes => [:content, :author_id])
+    params.require(:meeting).permit(:team_id, :space_id, :time, :location, :notes_attributes => [:content, :author_id, :id])
   end
 end

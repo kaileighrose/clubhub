@@ -23,6 +23,7 @@
   <%= f.fields_for :notes do |note_fields| %>
     <%= note_fields.text_area :content %>
     <%= note_fields.hidden_field :author_id, :value => current_user.id %>
+    <%= note_fields.hidden_field :id, :value => @note_id %>
   <% end %>
   <br>
 <%=f.submit%>
