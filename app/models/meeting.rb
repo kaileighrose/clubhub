@@ -11,7 +11,7 @@ class Meeting < ActiveRecord::Base
 
   def notes_attributes=(note)
     newn = Note.find_or_create_by(id: note["0"]["id"])
-    newn = Note.update(author_id: note["0"]["author_id"], meeting_id: self, content: note["0"]["content"])
+    newn.update(author_id: note["0"]["author_id"], meeting_id: self, content: note["0"]["content"])
     newn.save
     self.notes << newn
   end

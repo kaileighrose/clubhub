@@ -78,7 +78,7 @@ class MeetingsController < ApplicationController
       redirect_to root_path
     else
       @meetings = @team.meetings
-      redirect_to team_path
+      redirect_to team_path(@team)
     end
   end
 
