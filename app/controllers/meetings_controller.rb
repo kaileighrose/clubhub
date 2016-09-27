@@ -43,7 +43,7 @@ class MeetingsController < ApplicationController
     else
       @meeting = Meeting.find(params[:id])
       @path = team_meeting_path(@team, @meeting)
-      @meeting.notes.build
+      @note = @meeting.notes.build
     end
   end
 

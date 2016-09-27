@@ -9,11 +9,18 @@ class Meeting < ActiveRecord::Base
   validates :team_id, presence: true
   validate :date_in_future
 
-  def notes_attributes=(note)
-    newn = Note.find_or_create_by(id: note["0"]["id"])
-    newn.update(author_id: note["0"]["author_id"], meeting_id: self, content: note["0"]["content"])
-    newn.save
-    self.notes << newn
+  def notes_attributes=(notes)
+    notes.each do |n, note|
+      binding.pry
+      if note["content"] != nil 
+        newn = Note.find_or_create_by(id: note["id"])
+        newn.update(author_id: note["author_id"], meeting_id: self.id, content: note["content"])
+        newn.save
+        if !!self.notes.include?(newn)
+          self.notes << newn
+        end
+      end
+    end
   end
 
   def date_in_future
