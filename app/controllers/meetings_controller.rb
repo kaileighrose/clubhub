@@ -27,8 +27,9 @@ class MeetingsController < ApplicationController
         end
       end
       if @meeting.save
-        redirect_to team_meeting_path(@meeting.team, @meeting)
+        redirect_to team_meetings_path(@meeting.team, @meeting)
       else
+        @path = team_meetings_path
         render :new
       end
     end
