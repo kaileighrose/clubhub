@@ -3,7 +3,6 @@ class Meeting < ActiveRecord::Base
   belongs_to :team
   belongs_to :space
   has_many :notes
-  #accepts_nested_attributes_for :notes
 
   validates :time, presence: true
   validates :team_id, presence: true
