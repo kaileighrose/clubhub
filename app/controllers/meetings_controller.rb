@@ -30,6 +30,7 @@ class MeetingsController < ApplicationController
         redirect_to team_meetings_path(@meeting.team, @meeting)
       else
         @path = team_meetings_path
+        @meeting.notes.build
         render :new
       end
     end
@@ -48,6 +49,7 @@ class MeetingsController < ApplicationController
   end
 
   def update
+    @team = Team.find(params[:team_id])
     @meeting = Meeting.find(params[:id])
     if current_user == nil || @meeting.team.members.include?(current_user) != true
       flash[:error] = "Must Be a Team Member to Edit a Meeting"
@@ -58,6 +60,7 @@ class MeetingsController < ApplicationController
       if @meeting.save
         redirect_to team_meeting_path(@meeting.team, @meeting)
       else
+        @path = team_meeting_path(@team, @meeting)
         render :edit
       end
     end

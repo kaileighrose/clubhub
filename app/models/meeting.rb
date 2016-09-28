@@ -10,13 +10,14 @@ class Meeting < ActiveRecord::Base
   validate :date_in_future
 
   def notes_attributes=(note)
-   
-    if note["0"]["content"] != nil 
-      newn = Note.find_or_create_by(id: note["0"]["id"])
-      newn.update(author_id: note["0"]["author_id"], meeting_id: self.id, content: note["0"]["content"])
-      newn.save
-      if !!self.notes.include?(newn)
+    if note["0"]["content"] != nil
+      if note["0"]["id"] == nil 
+        newn = Note.create(author_id: note["0"]["author_id"], meeting_id: self.id, content: note["0"]["content"])
         self.notes << newn
+      else
+        newn = Note.find(note["0"]["id"])
+        newn.update(author_id: note["0"]["author_id"], meeting_id: self.id, content: note["0"]["content"])
+        newn.save
       end
     end
   end
