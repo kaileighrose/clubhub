@@ -11,7 +11,7 @@ class Meeting < ActiveRecord::Base
 
   def notes_attributes=(note)
     if note["0"]["content"] != nil
-      if note["0"]["id"] == nil 
+      if note["0"]["id"] == nil || note["0"]["id"] == ""
         newn = Note.create(author_id: note["0"]["author_id"], meeting_id: self.id, content: note["0"]["content"])
         self.notes << newn
       else

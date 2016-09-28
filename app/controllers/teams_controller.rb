@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
 
   def show
     if current_user != nil
-      @team = Team.find(params[:id])
+      (params[:team_id] == nil) ? @team = Team.find(params[:id]) : @team = Team.find(params[:team_id])    
     else
       redirect_to root_path
     end
