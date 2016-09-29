@@ -92,8 +92,9 @@ class MeetingsController < ApplicationController
       flash[:error] = "Must Be a Team Member to Delete Meetings"
       redirect_to root_path
     else
+      @team = @meeting.team
       @meeting.destroy
-      redirect_to team_path
+      redirect_to team_path(@team)
     end
   end
 
