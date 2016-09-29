@@ -17,8 +17,13 @@
   <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %><br>
   <br>
   <%= f.label :location %>
-  <%= f.text_field :location %><br>
-  <%= f.select :location, Meeting.existing_locations, {include_blank: true}, prompt: true %>
+  <%= f.text_field :location, list: "existing_locations" %><br>
+  <datalist id="existing_locations">
+    <%= Meeting.existing_locations.each do |location| %>
+      <option value="<%= location %>">
+    <% end %>
+  </datalist>
+ 
   <br>
   <%= f.label :note %>
   <%= f.fields_for :notes do |note_fields| %>
