@@ -8,6 +8,17 @@ class Meeting < ActiveRecord::Base
   validates :team_id, presence: true
   validate :date_in_future
 
+  @@existing_locations = [];
+
+  def self.existing_locations
+    Meeting.all.each do |m|
+      if m.location != nil && !@@existing_locations.include?(m.location)
+        @@existing_locations << m.location
+      end
+    end
+    @@existing_locations
+  end
+
   def notes_attributes=(note)
     if note["0"]["content"] != nil
       if note["0"]["id"] == nil || note["0"]["id"] == ""

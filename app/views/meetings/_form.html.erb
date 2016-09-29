@@ -17,6 +17,7 @@
   <%= f.datetime_select :time, ampm: true, prompt: true, start_year: 2016 %><br>
   <br>
   <%= f.label :location %>
+  <%= f.select :location, Meeting.existing_locations, prompt: true %>
   <%= f.text_field :location %><br>
   <br>
   <%= f.label :note %>

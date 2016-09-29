@@ -1,3 +1,4 @@
+require "pry"
 class MeetingsController < ApplicationController
   
   def new
