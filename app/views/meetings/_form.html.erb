@@ -20,7 +20,7 @@
   <%= f.text_field :location, list: "existing_locations" %><br>
   <datalist id="existing_locations">
     <%= Meeting.existing_locations.each do |location| %>
-      <option value="<%= location %>">
+      <option value="<%= location %>"></option>
     <% end %>
   </datalist>
  
