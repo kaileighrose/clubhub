@@ -23,9 +23,20 @@
   $(function () {
     $('#noteform').hide();
     $('#addnote').click(function(event) {
-      //prevent form from submitting the default way
       event.preventDefault();
       $('#noteform').show();
+    });
+    $('form').submit(function(event) {
+      event.preventDefault();
+      var values = $(this).serialize();
+      var posting = $.post('/teams/' + @meeting.team + '/meetings/' + @meeting + '/notes/new', values);
+      posting.done(function(data) {
+        var product = data["product"];
+        $("#productName").text(product["name"]);
+        $("#productPrice").text("$" + product["price"]);
+        $("#productInventory").text(product["inventory"]);
+        $("#productBody").text(product["description"]);
+      });
     });
   });
 </script>
