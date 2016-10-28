@@ -11,7 +11,9 @@
 <% @meeting.notes.each do |n| %>
   <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 <%end%>
-<h3><%=link_to "Return to Team Page", team_path(@meeting.team)%></h3>
+<div id="noteform"></div>
 <h3><%=link_to "Add a Note", new_team_meeting_note_path(@meeting.team, @meeting)%></h3>
+
+<h3><%=link_to "Return to Team Page", team_path(@meeting.team)%></h3>
 <h3><%=link_to "Edit this Meeting", edit_team_meeting_path(@meeting.team, @meeting)%> </h3>
 <h3><%=link_to "Cancel this Meeting", team_meeting_path(@meeting.team, @meeting), method: :delete %> </h3>
