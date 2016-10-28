@@ -55,6 +55,9 @@ class NotesController < ApplicationController
     end
   end
 
+  def index
+    @notes = Note.all?
+    render json: @notes
   end
 
   private
