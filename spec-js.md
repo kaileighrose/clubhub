@@ -5,7 +5,8 @@ Specs:
 - [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
 - [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
 - [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
-- [ ] Include at least one link that loads or updates a resource without reloading the page.
+- [x] Include at least one link that loads or updates a resource without reloading the page.
+      -- Meeting Notes Form (creates note and adds it to notes)
 - [ ] Translate JSON responses into js model objects.
 - [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
 
