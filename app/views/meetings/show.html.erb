@@ -11,7 +11,7 @@
 <% @meeting.notes.each do |n| %>
   <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 <%end%>
-<div id="noteform"></div>
+<div id="noteform"><%= render 'notes/form' %></div>
 <button id="addnote">Add Note</button>
 <h3><%=link_to "Add a Note", new_team_meeting_note_path(@meeting.team, @meeting)%></h3>
 
@@ -21,10 +21,11 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
+    $('#noteform').hide();
     $('#addnote').click(function(event) {
       //prevent form from submitting the default way
       event.preventDefault();
-      $('#noteform').html("<%= 'render' 'notes/form' %>");
+      $('#noteform').show();
     });
   });
 </script>
