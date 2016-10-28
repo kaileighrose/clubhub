@@ -8,12 +8,13 @@
 <h3>Location: TBD. </h3>
 <%end%>
 <h3>Meeting Notes:</h3>
+<div id="shownotes">
 <% @meeting.notes.each do |n| %>
   <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 <%end%>
+</div>
 <div id="noteform"><%= render 'notes/form' %></div>
 <button id="addnote">Add Note</button>
-<h3><%=link_to "Add a Note", new_team_meeting_note_path(@meeting.team, @meeting)%></h3>
 
 <h3><%=link_to "Return to Team Page", team_path(@meeting.team)%></h3>
 <h3><%=link_to "Edit this Meeting", edit_team_meeting_path(@meeting.team, @meeting)%> </h3>
@@ -29,13 +30,14 @@
     $('form').submit(function(event) {
       event.preventDefault();
       var values = $(this).serialize();
-      var posting = $.post('/teams/' + @meeting.team + '/meetings/' + @meeting + '/notes/new', values);
+      var posting = $.post('/notes', values);
       posting.done(function(data) {
-        var product = data["product"];
-        $("#productName").text(product["name"]);
-        $("#productPrice").text("$" + product["price"]);
-        $("#productInventory").text(product["inventory"]);
-        $("#productBody").text(product["description"]);
+        var note = data;
+        $('#shownotes').append(note["content"]);
+       // $("#productName").text(product["name"]);
+//        $("#productPrice").text("$" + product["price"]);
+//        $("#productInventory").text(product["inventory"]);
+//        $("#productBody").text(product["description"]);
       });
     });
   });

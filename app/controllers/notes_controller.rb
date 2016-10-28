@@ -9,7 +9,6 @@ class NotesController < ApplicationController
     @note = Note.create(note_params)
     if @note.save
       render json: @note 
-      redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
     else
       render :new
     end
@@ -50,6 +49,10 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
     render json: @note
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @note }
+    end
   end
 
   end
