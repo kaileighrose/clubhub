@@ -45,18 +45,15 @@ class NotesController < ApplicationController
       flash[:error] = "Can Only Delete Your Own Notes"
       redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
     end
-    
+  end
+  
   def show
     @note = Note.find(params[:id])
     render json: @note
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @note }
-    end
   end
 
   def index
-    @notes = Note.all?
+    @notes = Note.all
     render json: @notes
   end
 

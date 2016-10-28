@@ -35,6 +35,7 @@
       posting.done(function(data) {
         var note = data;
         $('#shownotes').append(note["content"]);
+        $('#noteform').hide();
        // $("#productName").text(product["name"]);
 //        $("#productPrice").text("$" + product["price"]);
 //        $("#productInventory").text(product["inventory"]);
