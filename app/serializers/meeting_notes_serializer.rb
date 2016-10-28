@@ -1,3 +1,4 @@
 class MeetingNotesSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :author_id, :content
+  has_one :author
 end
