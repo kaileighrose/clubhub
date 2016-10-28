@@ -49,10 +49,7 @@ class NotesController < ApplicationController
     
   def show
     @note = Note.find(params[:id])
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @note }
-    end
+    render json: @note
   end
 
   end
