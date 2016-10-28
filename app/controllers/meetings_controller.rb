@@ -69,6 +69,7 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
+    @note = Note.new
     if current_user == nil || @meeting.team.members.include?(current_user) != true
       flash[:error] = "Must Be a Team Member to See Meetings"
       redirect_to root_path
