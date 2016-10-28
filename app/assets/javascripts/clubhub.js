@@ -1,3 +1,7 @@
 $(function(){
-  
+  attachListeners();
 });
+
+function attachListeners() {
+  
+}
