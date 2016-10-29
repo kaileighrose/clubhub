@@ -74,6 +74,10 @@ class MeetingsController < ApplicationController
       flash[:error] = "Must Be a Team Member to See Meetings"
       redirect_to root_path
     end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @meeting }
+    end
   end
 
   def index
