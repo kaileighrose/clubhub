@@ -1,4 +1,4 @@
-<a href="#" class="js-next" data-id="<%=@meeting.id%>">Next Meeting</a>
+<a href="#" class="js-next" data-teamid="<%=@meeting.team_id%>" data-id="<%=@meeting.id%>">Next Meeting</a>
 <h1>Meeting</h1>
 <h2 id="meetingTeam">Team: <%= @meeting.team.name %></h2>
 <h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
@@ -25,6 +25,7 @@
   $(function () {
     $('#noteform').hide();
     $('#shownotes').html(showNotes());
+    $(".js-next").on("click", function() {nextMeeting(event)});
     $('#addnote').click(function(event) {
       event.preventDefault();
       $('#noteform').show();
