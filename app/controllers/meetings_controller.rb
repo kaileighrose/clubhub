@@ -21,6 +21,7 @@ class MeetingsController < ApplicationController
     else
       @meeting = Meeting.create(meeting_params)
       @meeting.team = Team.find(params[:team_id])
+      @meeting.team_name = @team.name
       if @meeting.notes != nil
         @meeting.notes.each do |n|
           n.meeting_id = @meeting.id
@@ -69,6 +70,8 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
+    @team = Team.find(params[:team_id])
+    @meeting.team_name = @team.name
     @note = Note.new
     if current_user == nil || @meeting.team.members.include?(current_user) != true
       flash[:error] = "Must Be a Team Member to See Meetings"

@@ -15,16 +15,16 @@ function nextMeeting() {
     $.get("/meetings/" + nextId + ".json", function(data) {
       var meeting = data;
       $(".meetingTeam").text("Team: " + meeting["name"]);
-      $(".meetingDate").text("Date: " + meeting["price"]);
-      $(".meetingTime").text("Time: " + meeting["description"]);
+      $(".meetingDate").text("Date: " + meeting["datetime"]);
+      $(".meetingTime").text("Time: " + meeting["datetime"]);
       $(".meetingLocation").text("Location: " + meeting["location"]);
       $(".js-next").attr("data-id", meeting["id"]);
     });
   });
 }
-id="meetingTeam">Team: <%= @meeting.team.name %></h2>
-<h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
-<h3 id="meetingTime">Time: <%= format_time(@meeting.time) %></h3>
+// id="meetingTeam">Team: <%= @meeting.team.name %></h2>
+// <h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
+// <h3 id="meetingTime">Time: <%= format_time(@meeting.time) %></h3>
 
 function showNotes() {
   var getting = $.get('/games');
