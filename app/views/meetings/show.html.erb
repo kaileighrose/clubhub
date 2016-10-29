@@ -1,10 +1,10 @@
 <a href="#" class="js-next" data-id="<%=@meeting.id%>">Next Meeting</a>
 <h1>Meeting</h1>
-<h2>Team: <%= @meeting.team.name %></h2>
-<h3>Date: <%= format_date(@meeting.time) %></h3>
-<h3>Time: <%= format_time(@meeting.time) %></h3>
+<h2 id="meetingTeam">Team: <%= @meeting.team.name %></h2>
+<h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
+<h3 id="meetingTime">Time: <%= format_time(@meeting.time) %></h3>
 <% if @meeting.location != nil %>
-<h3>Location: <%= @meeting.location %></h3>
+<h3 id="meetingLocation">Location: <%= @meeting.location %></h3>
 <%else%>
 <h3>Location: TBD. </h3>
 <%end%>
