@@ -1,4 +1,4 @@
-<a href="#" class="js-next" data-teamid="<%=@meeting.team_id%>" data-id="<%=@meeting.id%>">Next Meeting</a>
+<a href="#" class="js-next" data-teamid="<%=@meeting.team_id%>" data-id="<%=@meeting.id%>">| Next Meeting</a>
 <h1>Meeting</h1>
 <h2 id="meetingTeam">Team: <%= @meeting.team.name %></h2>
 <h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
@@ -35,13 +35,8 @@
       var values = $(this).serialize();
       var posting = $.post('/notes', values);
       posting.done(function(data) {
-        var note = data;
-        $('#shownotes').append(note["content"]);
+        $('#shownotes').append("<h4>" + data["author"]["name"] + ": " + data["content"] + "</h4>");
         $('#noteform').hide();
-       // $("#productName").text(product["name"]);
-//        $("#productPrice").text("$" + product["price"]);
-//        $("#productInventory").text(product["inventory"]);
-//        $("#productBody").text(product["description"]);
       });
     });
   });

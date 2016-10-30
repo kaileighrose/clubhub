@@ -7,6 +7,8 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.create(note_params)
+    @author = User.find(@note.author_id)
+    @note.author_name = @author.name
     if @note.save
       render json: @note 
     else
@@ -51,6 +53,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     @author = User.find(@note.author_id)
     @note.author_name = @author.name
+    @note.save
     render json: @note
   end
 
