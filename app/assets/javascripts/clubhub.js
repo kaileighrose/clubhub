@@ -6,6 +6,12 @@ $(function(){
 function attachListeners() {
   
 }
+
+function formatDate(date) {
+  var options = {}
+  options.timeZone = 'UTC';
+  return date.toLocaleDateString("en-US", options);
+}
 //<% @meeting.notes.each do |n| %>
 //  <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 //<%end%>
@@ -15,10 +21,11 @@ function nextMeeting(event) {
   var teamId = parseInt($(".js-next").attr("data-teamid"));
   $.get("/teams/" + teamId + "/meetings/" + nextId + ".json", function(data) {
     var meeting = data;
+    var date = new Date(meeting["time"]);
     console.log(data);
-    $("#meetingTeam").html("Team: " + meeting["team_name"]);
-    $("#meetingDate").html("Date: " + meeting["time"]);
-    $("#meetingTime").html("Time: " + meeting["time"]);
+    $("#meetingTeam").html("Team: " + meeting["team_name"] );
+    $("#meetingDate").html("Date: " + formatDate(date));
+    $("#meetingTime").html("Time: " + "<%= format_time(" + meeting["time"]+ ") %>");
     $("#meetingLocation").html("Location: " + meeting["location"]);
     $(".js-next").attr("data-id", meeting["id"]);
   });
