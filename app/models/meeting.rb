@@ -1,7 +1,6 @@
 require 'pry'
 class Meeting < ActiveRecord::Base
   belongs_to :team
-  belongs_to :space
   has_many :notes
 
   validates :time, presence: true

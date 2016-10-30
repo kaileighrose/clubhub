@@ -8,8 +8,8 @@
 <%else%>
 <h3>Location: TBD. </h3>
 <%end%>
-<h3>Meeting Notes:</h3>
 <div id="shownotes">
+<h3>Meeting Notes:</h3>
 <% @meeting.notes.each do |n| %>
   <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 <%end%>
@@ -24,7 +24,7 @@
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('#noteform').hide();
-    $('#shownotes').html(showNotes());
+    // $('#shownotes').html(showNotes());
     $(".js-next").on("click", function() {nextMeeting(event)});
     $('#addnote').click(function(event) {
       event.preventDefault();

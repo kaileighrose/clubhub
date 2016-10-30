@@ -49,7 +49,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    @author = User.find(params(:author_id))
+    @author = User.find(@note.author_id)
     @note.author_name = @author.name
     render json: @note
   end
