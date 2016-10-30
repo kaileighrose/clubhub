@@ -21,11 +21,7 @@ function nextMeeting(event) {
     $("#meetingDate").html("Date: " + formatDate(date));
     $("#meetingTime").html("Time: " + formatTime(date));
     $("#meetingLocation").html("Location: " + meeting["location"]);
-    if (meeting["notes"].length > 0) {
-      $("#shownotes").html(showNotes(meeting["notes"]));
-    } else {
-      $("#shownotes").html();
-    };
+    showNotes(meeting["id"], meeting["team_id"]);
     $(".js-next").attr("data-id", meeting["id"]);
   });
 }
@@ -34,15 +30,13 @@ function nextMeeting(event) {
 //  <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
 //<%end%>
 
-function showNotes(notes) {
+function showNotes(meeting, team) {
   var noteshtml = "<h3>Meeting Notes:</h3>";
-  for (var i = 0; i < notes.length; i++) {
-    if (notes[i]["author_name"] == null) {
-      $.get("/teams/" + teamId + "/meetings/" + nextId + "/notes/" + notes[i]["id"] + ".json", function(data) {
-          notes[i]["author_name"] = data["author_name"]; 
-      });
-    }
-    noteshtml += "<h4>" + notes[i]["author_name"] + ": " + notes[i]["content"] + "</h4>";
-  }
-  return noteshtml;
+  var getting = $.get("/teams/" + team + "/meetings/" + meeting + "/notes")
+  getting.done(function(notes) {
+    for (var i = 0; i <  notes.length; i++) {
+        noteshtml += "<h4>" + notes[i]["author"]["name"] + ": " + notes[i]["content"] + "</h4>";
+      }  
+     $("#shownotes").html(noteshtml);
+  }); 
 }

@@ -55,7 +55,7 @@ class NotesController < ApplicationController
   end
 
   def index
-    @notes = Note.all
+    @notes = Note.where("meeting_id = ?", params[:meeting_id])
     render json: @notes
   end
 

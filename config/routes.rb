@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :teams do
     resources :meetings do
-      resources :notes, only: [:new, :edit, :show]
+      resources :notes, only: [:new, :edit, :show, :index]
     end
   end
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks", :registrations => "registrations" }
