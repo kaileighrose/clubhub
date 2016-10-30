@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029163412) do
+ActiveRecord::Schema.define(version: 20161030024842) do
 
   create_table "meetings", force: :cascade do |t|
     t.integer  "team_id"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20161029163412) do
     t.integer  "author_id"
     t.text     "content"
     t.integer  "meeting_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "author_name"
   end
 
   create_table "spaces", force: :cascade do |t|

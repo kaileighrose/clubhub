@@ -23,6 +23,9 @@ class Meeting < ActiveRecord::Base
     if note["0"]["content"] != nil
       if note["0"]["id"] == nil || note["0"]["id"] == ""
         newn = Note.create(author_id: note["0"]["author_id"], meeting_id: self.id, content: note["0"]["content"])
+        author = User.find(newn.author_id)
+        newn.author_name = author.name
+        newn.save
         self.notes << newn
       else
         newn = Note.find(note["0"]["id"])

@@ -46,9 +46,11 @@ class NotesController < ApplicationController
       redirect_to team_meeting_path(@note.meeting.team, @note.meeting)
     end
   end
-  
+
   def show
     @note = Note.find(params[:id])
+    @author = User.find(params(:author_id))
+    @note.author_name = @author.name
     render json: @note
   end
 

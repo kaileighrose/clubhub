@@ -1,12 +1,3 @@
-$(function(){
-  attachListeners();
-  
-});
-
-function attachListeners() {
-  
-}
-
 function formatDate(date) {
   var options = {}
   options.timeZone = 'UTC';
