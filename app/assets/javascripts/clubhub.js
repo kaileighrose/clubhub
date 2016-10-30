@@ -21,6 +21,7 @@ function nextMeeting(event) {
     $("#meetingDate").html("Date: " + formatDate(date));
     $("#meetingTime").html("Time: " + formatTime(date));
     $("#meetingLocation").html("Location: " + meeting["location"]);
+    $("input#note_meeting_id").val(meeting["id"]);
     showNotes(meeting["id"], meeting["team_id"]);
     $(".js-next").attr("data-id", meeting["id"]);
   });
@@ -35,7 +36,8 @@ function showNotes(meeting, team) {
   var getting = $.get("/teams/" + team + "/meetings/" + meeting + "/notes")
   getting.done(function(notes) {
     for (var i = 0; i <  notes.length; i++) {
-        noteshtml += "<h4>" + notes[i]["author"]["name"] + ": " + notes[i]["content"] + "</h4>";
+      var id = notes[i]["id"]
+        noteshtml += "<h4>" + notes[i]["author"]["name"] + ": " + notes[i]["content"] + `<a href="/teams/${team}/meetings/${meeting}/notes/${id}/edit"> | Edit this Note </a>` + `<a href="/notes/${id}" data-method="delete"> | Delete this Note</a>` + "</h4>";
       }  
      $("#shownotes").html(noteshtml);
   }); 

@@ -18,6 +18,7 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
+    @meeting = @note.meeting
     if @note.author_id == current_user.id
       @meeting_id = params[:meeting_id]
     else

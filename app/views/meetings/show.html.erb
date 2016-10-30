@@ -33,9 +33,11 @@
     $('form').submit(function(event) {
       event.preventDefault();
       var values = $(this).serialize();
+      var meetingId = parseInt($(".js-next").attr("data-id"));
+      var teamId = parseInt($(".js-next").attr("data-teamid"));
       var posting = $.post('/notes', values);
       posting.done(function(data) {
-        $('#shownotes').append("<h4>" + data["author"]["name"] + ": " + data["content"] + "</h4>");
+        $('#shownotes').append("<h4>" + data["author"]["name"] + ": " + data["content"] + `<a href="/teams/${teamId}/meetings/${meetingId}/notes/${data["id"]}/edit"> | Edit this Note </a>` + `<a href="/notes/${data["id"]}" data-method="delete"> | Delete this Note</a>` + "</h4>");
         $('#noteform').hide();
       });
     });
