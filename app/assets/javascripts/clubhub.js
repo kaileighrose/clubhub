@@ -12,9 +12,13 @@ function formatDate(date) {
   options.timeZone = 'UTC';
   return date.toLocaleDateString("en-US", options);
 }
-//<% @meeting.notes.each do |n| %>
-//  <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
-//<%end%>
+
+function formatTime(date) {
+  var options = {}
+  options.timeZone = 'UTC';
+  return date.toLocaleTimeString('en-US', options);
+}
+
 function nextMeeting(event) {
   event.preventDefault();
   var nextId = parseInt($(".js-next").attr("data-id")) + 1;
@@ -22,16 +26,17 @@ function nextMeeting(event) {
   $.get("/teams/" + teamId + "/meetings/" + nextId + ".json", function(data) {
     var meeting = data;
     var date = new Date(meeting["time"]);
-    console.log(data);
     $("#meetingTeam").html("Team: " + meeting["team_name"] );
     $("#meetingDate").html("Date: " + formatDate(date));
-    $("#meetingTime").html("Time: " + "<%= format_time(" + meeting["time"]+ ") %>");
+    $("#meetingTime").html("Time: " + formatTime(date));
     $("#meetingLocation").html("Location: " + meeting["location"]);
     $(".js-next").attr("data-id", meeting["id"]);
   });
 }
-// <h3 id="meetingDate">Date: <%= format_date(@meeting.time) %></h3>
-// <h3 id="meetingTime">Time: <%= format_time(@meeting.time) %></h3>
+
+//<% @meeting.notes.each do |n| %>
+//  <h4><%=n.author.name%>: <%=n.content%> | <% if n.author == current_user %> <%=link_to "Edit this Note",  edit_team_meeting_note_path(@meeting.team, @meeting, n)%> | <%=link_to "Delete this Note", note_path(n), method: :delete%> <%end%></h4>
+//<%end%>
 
 function showNotes() {
   //var getting = $.get('/games');
