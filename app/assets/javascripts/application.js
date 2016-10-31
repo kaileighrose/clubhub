@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require clubhub
+//= require meeting
 //= require_tree .

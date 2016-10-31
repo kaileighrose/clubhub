@@ -15,15 +15,15 @@ function nextMeeting(event) {
   var nextId = parseInt($(".js-next").attr("data-id")) + 1;
   var teamId = parseInt($(".js-next").attr("data-teamid"));
   $.get("/teams/" + teamId + "/meetings/" + nextId + ".json", function(data) {
-    var meeting = data;
-    var date = new Date(meeting["time"]);
-    $("#meetingTeam").html("Team: " + meeting["team_name"] );
-    $("#meetingDate").html("Date: " + formatDate(date));
-    $("#meetingTime").html("Time: " + formatTime(date));
-    $("#meetingLocation").html("Location: " + meeting["location"]);
-    $("input#note_meeting_id").val(meeting["id"]);
-    showNotes(meeting["id"], meeting["team_id"]);
-    $(".js-next").attr("data-id", meeting["id"]);
+    var date = new Date(data["time"]);
+    var meeting = new Meeting(data["id"], data["team_id"], data["team_name"], date, data["location"]);
+    $("#meetingTeam").html("Team: " + meeting.team_name );
+    $("#meetingDate").html("Date: " + meeting.formatDate());
+    $("#meetingTime").html("Time: " + meeting.formatTime());
+    $("#meetingLocation").html("Location: " + meeting.location);
+    $("input#note_meeting_id").val(meeting.id);
+    showNotes(meeting.id, meeting.team_id);
+    $(".js-next").attr("data-id", meeting.id);
   });
 }
 
