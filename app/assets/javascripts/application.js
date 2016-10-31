@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require clubhub
-//= require todo
 //= require_tree .
