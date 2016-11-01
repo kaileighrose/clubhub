@@ -16,10 +16,11 @@ function nextMeeting(event) {
   var teamId = parseInt($(".js-next").attr("data-teamid"));
   $.get("/teams/" + teamId + "/meetings/" + nextId + ".json", function(data) {
     var date = new Date(data["time"]);
-    var meeting = new Meeting(data["id"], data["team_id"], data["team_name"], date, data["location"]);
+    var meeting = new Meeting(data["id"], data["team_id"], data["team_name"], data["location"]);
+    console.log(meeting);
     $("#meetingTeam").html("Team: " + meeting.team_name );
-    $("#meetingDate").html("Date: " + meeting.formatDate());
-    $("#meetingTime").html("Time: " + meeting.formatTime());
+    $("#meetingDate").html("Date: " + meeting.formatDate(date));
+    $("#meetingTime").html("Time: " + meeting.formatTime(date));
     $("#meetingLocation").html("Location: " + meeting.location);
     $("input#note_meeting_id").val(meeting.id);
     showNotes(meeting.id, meeting.team_id);

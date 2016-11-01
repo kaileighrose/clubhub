@@ -12,7 +12,8 @@ Specs:
       -- Meeting Notes Form (shows notes form, creates note and adds it to notes)
 - [x] Translate JSON responses into js model objects.
       -- List object created on Meeting Show Page
-- [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
+- [x] At least one of the js model objects must have at least one method added by your code to the prototype.
+      -- Meetings class 
 
 Confirm
 - [x] You have a large number of small Git commits
